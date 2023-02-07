@@ -1,5 +1,4 @@
 
-
 --create table Department
 
 Create table Department(

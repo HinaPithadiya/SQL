@@ -188,6 +188,7 @@ select * from Order_
 	and c.grade is not null--20. Write a SQL statement to make a Cartesian product between salesman and customer i.e. each salesman will appear for all 
 		--customers and vice versa for those salesmen who must belong to a city which is not the same as his customer and the
 		--customers should have their own grade    select * 	from Salesman s	cross join Customer c	where s.city is not null	and c.grade is not null	and s.city<>c.city
+
 select  top 1* from Salesman
 select  top 1* from Customer
 select TOP 1* from Order_

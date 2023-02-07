@@ -13,6 +13,7 @@ recorder_level smallint not null,
 discontinued bit not null
 )
 
+
 ---insert record--
 
 insert into products values('ABC',1,1,'24 - 12 oz bottles','18','39','0','10','1')
