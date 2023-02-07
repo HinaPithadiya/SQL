@@ -7,16 +7,6 @@ city varchar(50) not null,
 commission decimal(3,2) not null
 )
 
-
-
-
-
-
-
-
-
-
-
 -- Create Table Customer
 
 Create table Customer(
@@ -55,6 +45,7 @@ insert into Salesman values('Ram Patel','Ahmedabad','0.78'),
 						   ('Janvi Patel','Jamnagar','0.11'),
 						   ('Binal Gohel','Gandhinagr','0.35'),
 						   ('Hardik Patel','Kalol','0.50')
+
 select * from Salesman
 
 --insert data in customer table
@@ -98,21 +89,14 @@ insert into Order_ values(400,'2021-09-23',101,101),
 						(210, '2015-09-10',103 ,108),
 						(200, '2014-09-10',115 ,102)
 
+select * from Order_
 
 -- 1. write a SQL query to find the salesperson and customer who reside in the same city. Return Salesman, cust_name and city
 
-	select s_name as Salesman,c_name as Customer_name,Customer.city
-	from Salesman
-	inner join Customer on Salesman.city=Customer.city
 
 	 select s_name as Salesman,c_name as Customer_name,Customer.city
-	from Salesman, Customer
-	where Salesman.city=Customer.city
-
-	SELECT salesman.name AS "Salesman",
-customer.cust_name, customer.city 
-FROM salesman,customer 
-WHERE salesman.city=customer.city;
+	 from Salesman, Customer
+	 where Salesman.city=Customer.city
 
 
 --2. write a SQL query to find those orders where the order amount exists between 500 and 2000.	    --Return ord_no, purch_amt, cust_name, city
@@ -120,6 +104,7 @@ WHERE salesman.city=customer.city;
 	from Order_ o 
 	inner join Customer c on c.cust_id=o.ord_id
 	where o.purch_amt between 500 and 2000
+
 
 -- 3. write a SQL query to find the salesperson(s) and the customer(s) he represents. 
 		--Return Customer Name, city, Salesman, commission
@@ -137,12 +122,12 @@ WHERE salesman.city=customer.city;
 	inner join Salesman s on s.salesman_id=c.salesman_id
 	where s.commission > 0.12
 
+
 --5. write a SQL query to locate those salespeople who do not live in the same city where their customers live and 		--have received a commission of more than 12% from the  company. Return Customer Name, customer city, Salesman, 		--salesman city, commission
 	select c.c_name as customer_name, c.city,s.s_name as salesman, s.city, s.commission
 	from Customer c
 	inner join Salesman s on s.salesman_id = c.salesman_id
 	where s.commission >.12 and c.city <> s.city
-
 
 --6.  write a SQL query to find the details of an order. Return ord_no, ord_date, purch_amt, Customer Name, grade, Salesman, 
 		--commission
@@ -178,11 +163,11 @@ WHERE salesman.city=customer.city;
 --11 Write a SQL statement to generate a report with customer name, city, order number, order date, order amount, 		--salesperson name, and commission to determine if any of the existing customers have not placed orders or if they		--have placed orders through their salesman or by themselves	select c.c_name,c.city,o.ord_id as order_number,o.ord_date,o.purch_amt as order_amount,s.s_name as salesperson_name,s.commission	from Customer c	left outer join Order_ o on c.cust_id=o.cust_id	left outer join Salesman s on s.salesman_id=o.salesman_id
 
 --12.  Write a SQL statement to generate a list in ascending order of salespersons who work either for one or more customers 		--or have not yet joined any of the customers	select c.c_name,c.city,c.grade,s.s_name,s.city	from Customer c	right outer join Salesman s on s.salesman_id = c.salesman_id	order by s.salesman_id;
---13. write a SQL query to list all salespersons along with customer name, city, grade, order number, date, and amount.	select c.c_name,c.city,c.grade,o.ord_id,o.ord_date,o.purch_amt	from Customer c	right outer join Salesman s on s.salesman_id=c.salesman_id	right outer join Order_ o on c.cust_id=o.cust_id--14. Write a SQL statement to make a list for the salesmen who either work for one or more customers or yet to join any 		--of the customers. The customer may have placed, either one or more orders on or above order amount 2000  and must 		--have a grade, or he may not have placed any order to the associated supplier.	select c.c_name,c.city,c.grade,s.s_name,o.ord_id,o.ord_date,o.purch_amt 	from Customer c	right outer join Salesman s on s.salesman_id=c.salesman_id	left outer join Order_ o on o.cust_id =c.cust_id	where o.purch_amt>=2000	and c.grade is not null;--15. Write a SQL statement to generate a list of all the salesmen who either work for one
+--13. write a SQL query to list all salespersons along with customer name, city, grade, order number, date, and amount.	select c.c_name,c.city,c.grade,o.ord_id,o.ord_date,o.purch_amt	from Customer c	right outer join Salesman s on s.salesman_id=c.salesman_id	right outer join Order_ o on c.cust_id=o.cust_id--14. Write a SQL statement to make a list for the salesmen who either work for one or more customers or yet to join any 		--of the customers. The customer may have placed, either one or more orders on or above order amount 2000  and must 		--have a grade, or he may not have placed any order to the associated supplier.	select c.c_name,c.city,c.grade,s.s_name,o.ord_id,o.ord_date,o.purch_amt 	from Customer c	right outer join Salesman s on s.salesman_id=c.salesman_id	left outer join Order_ o on o.cust_id =c.cust_id	where o.purch_amt>=2000	and c.grade is not null;--15. Write a SQL statement to generate a list of all the salesmen who either work for one
 		--or more customers or have yet to join any of them. The customer may have placed
 		--one or more orders at or above order amount 2000, and must have a grade, or he
-		--may not have placed any orders to the associated supplier					.	select c.c_name,c.city,c.grade,s.s_name,o.ord_id,o.ord_date,o.purch_amt 	from Customer c	right outer join Salesman s on s.salesman_id=c.salesman_id	left outer join Order_ o on o.cust_id =c.cust_id	where o.purch_amt>=2000	and c.grade is not null;--16. Write a SQL statement to generate a report with the customer name, city, order no. order date, purchase amount for only 
-	  --those customers on the list who must have a grade and placed one or more orders or which order(s) have been placed by 	  --the customer who neither is on the list nor has a grade.	  select c.c_name,c.city,o.ord_id,o.ord_date,o.purch_amt	  from Customer c	  full outer join Order_ o on c.cust_id=o.cust_id	  where c.grade is not null;--17. Write a SQL query to combine each row of the salesman table with each row of the customer table	
+		--may not have placed any orders to the associated supplier					.	select c.c_name,c.city,c.grade,s.s_name,o.ord_id,o.ord_date,o.purch_amt 	from Customer c	right outer join Salesman s on s.salesman_id=c.salesman_id	left outer join Order_ o on o.cust_id =c.cust_id	where o.purch_amt>=2000	and c.grade is not null;--16. Write a SQL statement to generate a report with the customer name, city, order no. order date, purchase amount for only 
+	  --those customers on the list who must have a grade and placed one or more orders or which order(s) have been placed by 	  --the customer who neither is on the list nor has a grade.	  select c.c_name,c.city,o.ord_id,o.ord_date,o.purch_amt	  from Customer c	  full outer join Order_ o on c.cust_id=o.cust_id	  where c.grade is not null;--17. Write a SQL query to combine each row of the salesman table with each row of the customer table	
 	  select *
 	  from Customer
 	  cross join Salesman
@@ -202,12 +187,7 @@ WHERE salesman.city=customer.city;
 	where s.city is not null
 	and c.grade is not null--20. Write a SQL statement to make a Cartesian product between salesman and customer i.e. each salesman will appear for all 
 		--customers and vice versa for those salesmen who must belong to a city which is not the same as his customer and the
-		--customers should have their own grade    select * 	from Salesman s	cross join Customer c	where s.city is not null	and c.grade is not null	and s.city<>c.city
-
-
-
-	
-
+		--customers should have their own grade    select * 	from Salesman s	cross join Customer c	where s.city is not null	and c.grade is not null	and s.city<>c.city
 select  top 1* from Salesman
 select  top 1* from Customer
 select TOP 1* from Order_
